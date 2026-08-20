@@ -15,9 +15,9 @@ class NewRegister < Formula
   depends_on "cmake" => :build
   depends_on "glm"
   depends_on "hdf5"
+  depends_on :macos
   depends_on "netcdf"
   depends_on "nlohmann-json"
-  depends_on :macos
 
   # ---------------------------------------------------------------------------
   # Pre-fetched git sources for dependencies with no standalone Homebrew
