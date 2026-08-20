@@ -12,12 +12,12 @@ class NewRegister < Formula
   # been packaged/tested here. The Linux path (GLFW + Vulkan/OpenGL2) needs a
   # different dependency set (vulkan-loader, glfw, ...) that this formula does
   # not declare.
-  depends_on :macos
   depends_on "cmake" => :build
   depends_on "glm"
   depends_on "hdf5"
   depends_on "netcdf"
   depends_on "nlohmann-json"
+  depends_on :macos
 
   # ---------------------------------------------------------------------------
   # Pre-fetched git sources for dependencies with no standalone Homebrew
