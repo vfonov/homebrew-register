@@ -79,7 +79,8 @@ class NewRegister < Formula
   end
 
   test do
-    assert_match "Usage: new_register", shell_output("#{bin}/new_register --help 2>&1", 1)
-    assert_match "Usage: new_mincpik", shell_output("#{bin}/new_mincpik --help 2>&1", 1)
+    # Both exit 0 on --help (unlike minc-toolkit's mincinfo, which exits 1).
+    assert_match "Usage: new_register", shell_output("#{bin}/new_register --help 2>&1")
+    assert_match "Usage: new_mincpik", shell_output("#{bin}/new_mincpik --help 2>&1")
   end
 end
