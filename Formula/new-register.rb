@@ -1,8 +1,8 @@
 class NewRegister < Formula
   desc "Multi-volume MINC2/NIfTI viewer with tag-based registration (ImGui + Metal)"
   # Private repo — not publicly browsable, but this is the real fetch location.
-  homepage "ssh://git@192.168.2.101:2222/vfonov/vibe_register.git"
-  url "ssh://git@192.168.2.101:2222/vfonov/vibe_register.git",
+  homepage "https://github.com/vfonov/vibe_register.git"
+  url "https://github.com/vfonov/vibe_register.git",
       branch:   "main",
       revision: "79d94a69726edfa899f9e3d18df70cf1e37fdb2a"
   version "0.1.0-20260819" # project() VERSION in new_register/CMakeLists.txt, plus commit date
