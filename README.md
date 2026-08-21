@@ -19,14 +19,18 @@ brew install --build-from-source new-register
 
 Builds `new_register` and `new_mincpik` (macOS/Metal only — the Linux GLFW +
 Vulkan/OpenGL2 path is not packaged here). `hdf5`, `netcdf`, `glm`, and
-`nlohmann-json` come from Homebrew; system Eigen3 is tried too but rejected
-today (Homebrew's `eigen` is 5.x, which fails new_register's pinned
-same-major-version compatibility check against 3.4.0). Dear ImGui (docking
-branch), libminc, minc2-simple, and Eigen have no usable Homebrew package, so
-each is declared as a pinned-commit `resource` and staged into place at
-install time via CMake's `FETCHCONTENT_SOURCE_DIR_<NAME>` and this project's
-own `LIBMINC_SOURCE_DIR` / `MINC2_SIMPLE_SOURCE_DIR` / `EIGEN_SOURCE_DIR`
-overrides, so the actual build runs with no network access.
+`nlohmann-json` come from Homebrew. `new_register`'s `find_package(Eigen3 ...)`
+now accepts a real Homebrew `eigen` install too (Eigen jumped from the 3.4
+series straight to 5.0, and Homebrew's `eigen` formula is 5.x) — but this
+formula still pins its own Eigen 5.0.1 as a `resource` rather than declaring
+`depends_on "eigen"`, for the same fully offline/deterministic build as the
+other pinned dependencies below. Dear ImGui (docking branch), libminc,
+minc2-simple, and Eigen have no usable Homebrew package (Eigen has one, it's
+just deliberately not used here), so each is declared as a pinned-commit
+`resource` and staged into place at install time via CMake's
+`FETCHCONTENT_SOURCE_DIR_<NAME>` and this project's own `LIBMINC_SOURCE_DIR` /
+`MINC2_SIMPLE_SOURCE_DIR` / `EIGEN_SOURCE_DIR` overrides, so the actual build
+runs with no network access.
 
 `mriv` (the terminal viewer subproject) and `new_qc` (the standalone image QC
 viewer) are not built by this formula — both are excluded via

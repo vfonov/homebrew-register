@@ -22,10 +22,11 @@ class NewRegister < Formula
   # ---------------------------------------------------------------------------
   # Pre-fetched git sources for dependencies with no standalone Homebrew
   # formula (Dear ImGui's docking branch, and the BIC-MNI/NIST-MNI MINC2
-  # stack), plus Eigen — Homebrew's "eigen" formula is now a 5.x release and
-  # fails new_register's `find_package(Eigen3 3.3)` same-major-version
-  # compatibility check against the 3.4.0 this project is built against, so
-  # it always falls back to source too.
+  # stack), plus Eigen — new_register's `find_package(Eigen3 ...)` accepts a
+  # real Homebrew "eigen" install (5.x) too, but this formula deliberately
+  # pins its own Eigen resource instead of `depends_on "eigen"`, for the same
+  # fully offline/deterministic install property as imgui/libminc/
+  # minc2-simple below.
   #
   # Each is staged into place at install time and handed to CMake via a
   # source-dir override (either the built-in FetchContent_SOURCE_DIR_<NAME>
@@ -49,8 +50,8 @@ class NewRegister < Formula
   end
 
   resource "eigen" do
-    url "https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz"
-    sha256 "8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72"
+    url "https://gitlab.com/libeigen/eigen/-/archive/5.0.1/eigen-5.0.1.tar.gz"
+    sha256 "e9c326dc8c05cd1e044c71f30f1b2e34a6161a3b6ecf445d56b53ff1669e3dec"
   end
 
   def install
