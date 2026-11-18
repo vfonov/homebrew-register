@@ -4,8 +4,8 @@ class NewRegister < Formula
   homepage "https://github.com/vfonov/vibe_register.git"
   url "https://github.com/vfonov/vibe_register.git",
       branch:   "main",
-      revision: "79d94a69726edfa899f9e3d18df70cf1e37fdb2a"
-  version "0.1.0-20260819" # project() VERSION in new_register/CMakeLists.txt, plus commit date
+      revision: "45a53a0940f39b83e6d46d79f647177ebefe36dc"
+  version "0.1.1-20260819" # project() VERSION in new_register/CMakeLists.txt, plus commit date
 
   # macOS only: new_register's CMakeLists.txt switches to a native Cocoa+Metal
   # backend on Apple (main_macos.mm + MetalBackend.mm) and only that path has
