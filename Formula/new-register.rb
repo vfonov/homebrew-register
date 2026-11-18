@@ -5,7 +5,7 @@ class NewRegister < Formula
   url "https://github.com/vfonov/vibe_register.git",
       branch:   "main",
       revision: "45a53a0940f39b83e6d46d79f647177ebefe36dc"
-  version "0.1.1-20260819" # project() VERSION in new_register/CMakeLists.txt, plus commit date
+  version "0.1.1-20261009" # project() VERSION in new_register/CMakeLists.txt, plus commit date
 
   # macOS only: new_register's CMakeLists.txt switches to a native Cocoa+Metal
   # backend on Apple (main_macos.mm + MetalBackend.mm) and only that path has
@@ -33,6 +33,12 @@ class NewRegister < Formula
   # mechanism for imgui, or the project's own LIBMINC_SOURCE_DIR /
   # MINC2_SIMPLE_SOURCE_DIR / EIGEN_SOURCE_DIR cache variables) so the actual
   # build runs with zero network access. See new_register/CMakeLists.txt.
+  #
+  # The project prefers an already-installed Eigen3 / LIBMINC / minc-toolkit
+  # over these source dirs, so install() also turns those lookups off:
+  # otherwise a Homebrew `eigen` (whose headers superenv hides, as it is not a
+  # declared dependency) or a minc-toolkit under /opt/minc gets picked up
+  # instead, breaking the build or linking the result against /opt/minc.
   # ---------------------------------------------------------------------------
   resource "imgui" do
     url "https://github.com/ocornut/imgui/archive/fd13a1e8923a0a7077b404fc36fd063b25a0c0b5.tar.gz"
@@ -67,6 +73,9 @@ class NewRegister < Formula
       -DLIBMINC_SOURCE_DIR=#{buildpath}/resources/libminc
       -DMINC2_SIMPLE_SOURCE_DIR=#{buildpath}/resources/minc2-simple
       -DEIGEN_SOURCE_DIR=#{buildpath}/resources/eigen
+      -DCMAKE_DISABLE_FIND_PACKAGE_Eigen3=ON
+      -DCMAKE_DISABLE_FIND_PACKAGE_LIBMINC=ON
+      -DMINC_TOOLKIT_DIR=
       -DBUILD_TERMINAL_VIEWER=OFF
       -DBUILD_NEW_QC=OFF
       -DENABLE_TESTS=OFF
